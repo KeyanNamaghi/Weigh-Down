@@ -1,15 +1,13 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import styles from "../styles/Home.module.css";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 
-export default function Landing() {
+export default function Home() {
   const { data: session } = useSession();
   if (session) {
     return (
       <>
         Signed in as {session.user.email} <br />
         <button onClick={() => signOut()}>Sign out</button>
+        <button onClick={() => fetch("/api/hello")}>Hello</button>
       </>
     );
   }
@@ -24,10 +22,12 @@ export default function Landing() {
 export async function getServerSideProps({ req, res }) {
   const session = await getSession({ req });
 
-  if (session) {
+  console.log(session);
+
+  if (!session) {
     return {
       redirect: {
-        destination: "/home",
+        destination: "/",
       },
     };
   }
