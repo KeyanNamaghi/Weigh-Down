@@ -1,38 +1,15 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
-import styles from "../styles/Home.module.css";
+import Link from 'next/link'
 
 export default function Landing() {
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <Link
+        href={
+          'https://www.fitbit.com/oauth2/authorize?client_id=22BT48&expires_in=31536000&response_type=code&redirect_uri=http://localhost:3000/fitbit&scope=weight%20location%20settings%20profile%20nutrition%20activity%20sleep%20heartrate%20social'
+        }>
+        Sign in to Fitbit
+      </Link>
     </>
-  );
-}
-
-export async function getServerSideProps({ req, res }) {
-  const session = await getSession({ req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/home",
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
+  )
 }

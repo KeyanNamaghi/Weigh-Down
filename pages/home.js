@@ -1,38 +1,63 @@
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import { getCookie } from 'cookies-next'
+import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
+import moment from 'moment'
 
-export default function Home() {
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-        <button onClick={() => fetch("/api/hello")}>Hello</button>
-      </>
-    );
-  }
+export default function Home({ data }) {
+  const { weight } = data
+
+  const chartData = weight.map(({ weight, date }) => ({
+    value: weight,
+    time: moment(date).valueOf(),
+  }))
+
   return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
-  );
+    <div>
+      Welcome Home
+      <br />
+      <ResponsiveContainer width='95%' height={500}>
+        <ScatterChart>
+          <XAxis
+            dataKey='time'
+            domain={['auto', 'auto']}
+            name='Time'
+            tickFormatter={(unixTime) => moment(unixTime).format('l')}
+            type='number'
+          />
+          <YAxis dataKey='value' name='Value' domain={[90, 'auto']} />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+
+          <Scatter
+            data={chartData}
+            line={{ stroke: '#aaa', strokeWidth: 1 }}
+            lineJointType='monotoneX'
+            lineType='joint'
+            name='Values'
+          />
+        </ScatterChart>
+      </ResponsiveContainer>
+      <br />
+      <div>
+        {weight.map((reading, i) => {
+          return <div key={i}>{JSON.stringify(reading, null, 2)}</div>
+        })}
+      </div>
+    </div>
+  )
 }
 
 export async function getServerSideProps({ req, res }) {
-  const session = await getSession({ req });
+  const accessToken = getCookie('_wd_access_token', { req, res })
 
-  console.log(session);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-      },
-    };
-  }
+  const weight = await fetch(`${process.env.URL}/api/weight`, {
+    headers: {
+      cookie: `accessToken=${accessToken}`,
+    },
+  })
+  const json = await weight.json()
 
   return {
-    props: { session },
-  };
+    props: {
+      data: json,
+    },
+  }
 }

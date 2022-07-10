@@ -1,14 +1,37 @@
-import Link from 'next/link'
+import { getAccessToken } from '../utils/getAccessToken'
 
 export default function Fitbit() {
-  return (
-    <>
-      <Link
-        href={
-          'https://www.fitbit.com/oauth2/authorize?client_id=22BT48&expires_in=31536000&response_type=code&redirect_uri=http://localhost:3000/callback&scope=weight%20location%20settings%20profile%20nutrition%20activity%20sleep%20heartrate%20social'
-        }>
-        Sign in to Fitbit
-      </Link>
-    </>
-  )
+  return <>You should never see this page</>
+}
+
+export async function getServerSideProps({ req, res, query }) {
+  const { code } = query
+
+  if (!code) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },
+    }
+  }
+
+  const { error } = await getAccessToken({ code, req, res })
+
+  if (error) {
+    console.log(error)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },
+    }
+  }
+
+  return {
+    redirect: {
+      destination: '/home',
+      permanent: true,
+    },
+  }
 }
