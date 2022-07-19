@@ -1,6 +1,7 @@
 import { getCookie } from 'cookies-next'
 import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
 import moment from 'moment'
+import { getRefreshToken } from '../utils/getRefreshToken'
 
 export default function Home({ data }) {
   const { weight } = data
@@ -13,6 +14,7 @@ export default function Home({ data }) {
   return (
     <div>
       Welcome Home
+      <button onClick={() => getRefreshToken()}>Refresh</button>
       <br />
       <ResponsiveContainer width='95%' height={500}>
         <ScatterChart>

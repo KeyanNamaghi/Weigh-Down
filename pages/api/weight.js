@@ -29,7 +29,7 @@
 //   }
 
 export default async function handler(req, res) {
-  const data = await fetch('https://api.fitbit.com/1/user/-/body/log/weight/date/2022-07-01/1m.json', {
+  const data = await fetch('https://api.fitbit.com/1/user/-/body/log/weight/date/2022-08-01/1m.json', {
     headers: {
       Authorization: `Bearer ${req.cookies.accessToken}`,
     },
