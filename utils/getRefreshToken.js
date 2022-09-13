@@ -11,9 +11,9 @@ import { setCookie, getCookie } from 'cookies-next'
 // The header was not recognized to be a valid header for any of known implementations or a client_id was not specified in case of a public client Received header = undefined.
 // Visit https://dev.fitbit.com/docs/oauth2 for more information on the Fitbit Web API authorization process."}],"success":false}
 
-export const getRefreshToken = async () => {
+export const getRefreshToken = async (req, res) => {
   try {
-    const refresh_token = getCookie('_wd_refresh_token')
+    const refresh_token = getCookie('_wd_refresh_token') || req.cookies._wd_refresh_token
 
     console.log({ refresh_token })
 
@@ -21,7 +21,6 @@ export const getRefreshToken = async () => {
       'https://api.fitbit.com/oauth2/token?' +
         new URLSearchParams({
           grant_type: 'refresh_token',
-          client_id: '22BT48', // process.env.FITBIT_CLIENT_ID,
           refresh_token,
         }),
       {
@@ -29,6 +28,7 @@ export const getRefreshToken = async () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           authorization: process.env.FITBIT_AUTH_HEADER,
+          client_id: process.env.FITBIT_CLIENT_ID,
         },
       },
     )
@@ -44,6 +44,8 @@ export const getRefreshToken = async () => {
     // for (const [key, value] of Object.entries(data)) {
     //   setCookie(`_wd_${key}`, value, { req, res, maxAge: 60 * 6 * 24 })
     // }
+
+    console.log({ data })
 
     return { error: null }
   } catch (error) {

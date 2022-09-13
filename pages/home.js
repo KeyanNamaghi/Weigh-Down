@@ -1,7 +1,6 @@
 import { getCookie } from 'cookies-next'
 import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
 import moment from 'moment'
-import { getRefreshToken } from '../utils/getRefreshToken'
 
 export default function Home({ data }) {
   const { weight } = data
@@ -14,7 +13,7 @@ export default function Home({ data }) {
   return (
     <div>
       Welcome Home
-      <button onClick={() => getRefreshToken()}>Refresh</button>
+      <button onClick={() => fetch('/api/refresh')}>Refresh</button>
       <br />
       <ResponsiveContainer width='95%' height={500}>
         <ScatterChart>
@@ -22,7 +21,7 @@ export default function Home({ data }) {
             dataKey='time'
             domain={['auto', 'auto']}
             name='Time'
-            tickFormatter={(unixTime) => moment(unixTime).format('l')}
+            tickFormatter={(unixTime) => moment(unixTime).format('DD/MM/YY')}
             type='number'
           />
           <YAxis dataKey='value' name='Value' domain={[90, 'auto']} />
