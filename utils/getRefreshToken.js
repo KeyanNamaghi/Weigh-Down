@@ -35,7 +35,7 @@ export const getRefreshToken = async (req, res) => {
 
     if (!response.ok) {
       // TODO: handle errors, use refresh tokens
-      console.log('Failed to get access token')
+      console.log('Failed to get access token in refresh token')
       throw new Error(response.statusText)
     }
 

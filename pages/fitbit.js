@@ -8,6 +8,7 @@ export async function getServerSideProps({ req, res, query }) {
   const { code } = query
 
   if (!code) {
+    console.log('Missing code when landing on /fitbit')
     return {
       redirect: {
         destination: '/',
@@ -19,6 +20,7 @@ export async function getServerSideProps({ req, res, query }) {
   const { error } = await getAccessToken({ code, req, res })
 
   if (error) {
+    console.log('threw error when getAccessToken on /fitbit')
     console.log(error)
     return {
       redirect: {

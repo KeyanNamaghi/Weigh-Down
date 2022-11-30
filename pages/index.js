@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next'
 import Link from 'next/link'
 
 export default function Landing() {
@@ -12,4 +13,17 @@ export default function Landing() {
       </Link>
     </>
   )
+}
+
+export async function getServerSideProps({ req, res }) {
+  const accessToken = getCookie('_wd_access_token', { req, res })
+
+  if (accessToken) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: true,
+      },
+    }
+  }
 }

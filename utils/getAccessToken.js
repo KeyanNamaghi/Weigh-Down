@@ -21,14 +21,18 @@ export const getAccessToken = async ({ code, req, res }) => {
 
     if (!response.ok) {
       // TODO: handle errors, use refresh tokens
-      console.log('Failed to get access token')
+      console.log('Failed to get access token in getAccessToken')
       throw new Error(response.statusText)
     }
 
     const data = await response.json()
 
     for (const [key, value] of Object.entries(data)) {
-      setCookie(`_wd_${key}`, value, { req, res, maxAge: 60 * 6 * 24 })
+      if (key === 'refresh_token') {
+        setCookie(`_wd_${key}`, value, { req, res, maxAge: 60 * 60 * 24 * 30 })
+      } else {
+        setCookie(`_wd_${key}`, value, { req, res, maxAge: 28800 }) // 8 hours
+      }
     }
 
     return { error: null }

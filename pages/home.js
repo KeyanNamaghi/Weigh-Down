@@ -1,9 +1,10 @@
 import { getCookie } from 'cookies-next'
 import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
 import moment from 'moment'
+import { getRefreshToken } from '../utils/getRefreshToken'
 
 export default function Home({ data }) {
-  const { weight } = data
+  const { weight = [] } = data
 
   const chartData = weight.map(({ weight, date }) => ({
     value: weight,
@@ -49,12 +50,38 @@ export default function Home({ data }) {
 export async function getServerSideProps({ req, res }) {
   const accessToken = getCookie('_wd_access_token', { req, res })
 
-  const weight = await fetch(`${process.env.URL}/api/weight`, {
+  let weight = await fetch(`${process.env.URL}/api/weight`, {
     headers: {
       cookie: `accessToken=${accessToken}`,
     },
   })
-  const json = await weight.json()
+  let json = await weight.json()
+
+  if (json.errors) {
+    console.log({ error: json.errors })
+    const error = await getRefreshToken(req, res)
+
+    console.log({ error })
+
+    if ({ error }) {
+      console.log('refresh failed')
+      return {
+        redirect: {
+          destination: '/',
+          permanent: true,
+        },
+      }
+    }
+
+    console.log('refetching with new access token')
+
+    weight = await fetch(`${process.env.URL}/api/weight`, {
+      headers: {
+        cookie: `accessToken=${accessToken}`,
+      },
+    })
+    json = await weight.json()
+  }
 
   return {
     props: {
