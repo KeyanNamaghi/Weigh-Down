@@ -16,6 +16,7 @@ export default function Landing() {
 }
 
 export async function getServerSideProps({ req, res }) {
+  console.log('index.js')
   const accessToken = getCookie('_wd_access_token', { req, res })
 
   if (accessToken) {
@@ -25,5 +26,9 @@ export async function getServerSideProps({ req, res }) {
         permanent: true,
       },
     }
+  }
+
+  return {
+    props: {},
   }
 }

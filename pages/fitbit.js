@@ -5,6 +5,7 @@ export default function Fitbit() {
 }
 
 export async function getServerSideProps({ req, res, query }) {
+  console.log('fitbit.js')
   const { code } = query
 
   if (!code) {

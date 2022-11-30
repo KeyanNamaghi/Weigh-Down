@@ -1,7 +1,8 @@
-import { getCookie } from 'cookies-next'
+import { getCookie, deleteCookie } from 'cookies-next'
 import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
 import moment from 'moment'
 import { getRefreshToken } from '../utils/getRefreshToken'
+import { clearCookies } from '../utils/clearCookies'
 
 export default function Home({ data }) {
   const { weight = [] } = data
@@ -15,6 +16,7 @@ export default function Home({ data }) {
     <div>
       Welcome Home
       <button onClick={() => fetch('/api/refresh')}>Refresh</button>
+      <button onClick={() => clearCookies()}>Sign out</button>
       <br />
       <ResponsiveContainer width='95%' height={500}>
         <ScatterChart>
@@ -48,6 +50,7 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps({ req, res }) {
+  console.log('home.js')
   const accessToken = getCookie('_wd_access_token', { req, res })
 
   let weight = await fetch(`${process.env.URL}/api/weight`, {

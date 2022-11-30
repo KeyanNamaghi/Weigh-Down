@@ -41,10 +41,6 @@ export const getRefreshToken = async (req, res) => {
 
     const data = await response.json()
 
-    // for (const [key, value] of Object.entries(data)) {
-    //   setCookie(`_wd_${key}`, value, { req, res, maxAge: 60 * 6 * 24 })
-    // }
-
     console.log({ data })
 
     return { error: null }
