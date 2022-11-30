@@ -8,12 +8,13 @@ export async function getServerSideProps({ req, res, query }) {
   console.log('fitbit.js')
   const { code } = query
 
+  console.log({ query })
+
   if (!code) {
     console.log('Missing code when landing on /fitbit')
     return {
       redirect: {
         destination: '/',
-        permanent: true,
       },
     }
   }
@@ -26,15 +27,15 @@ export async function getServerSideProps({ req, res, query }) {
     return {
       redirect: {
         destination: '/',
-        permanent: true,
       },
     }
   }
 
+  console.log('redirecting you home')
+
   return {
     redirect: {
       destination: '/home',
-      permanent: true,
     },
   }
 }

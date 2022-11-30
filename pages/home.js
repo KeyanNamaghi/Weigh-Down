@@ -71,7 +71,6 @@ export async function getServerSideProps({ req, res }) {
       return {
         redirect: {
           destination: '/',
-          permanent: true,
         },
       }
     }
