@@ -2,10 +2,9 @@ import { getCookie } from 'cookies-next'
 import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
 import moment from 'moment'
 import { getRefreshToken } from '../utils/getRefreshToken'
-import { clearCookies } from '../utils/clearCookies'
 import { useEffect } from 'react'
 import { Header, SideDrawer } from '../components'
-import styles from '../styles/home.module.css'
+import styles from '../styles/Home.module.css'
 
 export default function Home({ data }) {
   const { weight = [] } = data
