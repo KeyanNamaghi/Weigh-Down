@@ -3,6 +3,7 @@ import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } fro
 import moment from 'moment'
 import { getRefreshToken } from '../utils/getRefreshToken'
 import { clearCookies } from '../utils/clearCookies'
+import { useEffect } from 'react'
 
 export default function Home({ data }) {
   const { weight = [] } = data
@@ -11,6 +12,14 @@ export default function Home({ data }) {
     value: weight,
     time: moment(date).valueOf(),
   }))
+
+  useEffect(() => {
+    if (window.location.hash === '#_=_') {
+      history.replaceState
+        ? history.replaceState(null, null, window.location.href.split('#')[0])
+        : (window.location.hash = '')
+    }
+  }, [])
 
   return (
     <div>
