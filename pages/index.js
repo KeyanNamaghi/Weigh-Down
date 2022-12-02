@@ -1,7 +1,7 @@
 import { getCookie } from 'cookies-next'
 import Image from 'next/image'
 import { useState } from 'react'
-import styles from '../styles/Index.module.css'
+import styles from '../styles/Landing.module.css'
 
 export default function Landing() {
   const [loading, setLoading] = useState(false)
