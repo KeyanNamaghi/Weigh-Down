@@ -53,7 +53,7 @@ export async function getServerSideProps({ req, res }) {
   console.log('home.js')
   const accessToken = getCookie('_wd_access_token', { req, res })
 
-  let weight = await fetch(`${process.env.VERCEL_URL}/api/weight`, {
+  let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
     headers: {
       cookie: `accessToken=${accessToken}`,
     },
@@ -77,7 +77,7 @@ export async function getServerSideProps({ req, res }) {
 
     console.log('refetching with new access token')
 
-    weight = await fetch(`${process.env.VERCEL_URL}/api/weight`, {
+    weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
       headers: {
         cookie: `accessToken=${accessToken}`,
       },

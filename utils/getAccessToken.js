@@ -8,7 +8,7 @@ export const getAccessToken = async ({ code, req, res }) => {
           code,
           grant_type: 'authorization_code',
           client_id: process.env.FITBIT_CLIENT_ID,
-          redirect_uri: `${process.env.VERCEL_URL}/fitbit`,
+          redirect_uri: `${process.env.NEXT_PUBLIC_URL}/fitbit`,
         }),
       {
         method: 'POST',
