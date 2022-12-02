@@ -1,9 +1,11 @@
-import { getCookie, deleteCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next'
 import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } from 'recharts'
 import moment from 'moment'
 import { getRefreshToken } from '../utils/getRefreshToken'
 import { clearCookies } from '../utils/clearCookies'
 import { useEffect } from 'react'
+import { Header, SideDrawer } from '../components'
+import styles from '../styles/home.module.css'
 
 export default function Home({ data }) {
   const { weight = [] } = data
@@ -13,6 +15,7 @@ export default function Home({ data }) {
     time: moment(date).valueOf(),
   }))
 
+  // Remove the annoying #_=_ at the end of the url on redirect
   useEffect(() => {
     if (window.location.hash === '#_=_') {
       history.replaceState
@@ -22,37 +25,39 @@ export default function Home({ data }) {
   }, [])
 
   return (
-    <div>
-      Welcome Home
-      <button onClick={() => fetch('/api/refresh')}>Refresh</button>
-      <button onClick={() => clearCookies()}>Sign out</button>
-      <br />
-      <ResponsiveContainer width='95%' height={500}>
-        <ScatterChart>
-          <XAxis
-            dataKey='time'
-            domain={['auto', 'auto']}
-            name='Time'
-            tickFormatter={(unixTime) => moment(unixTime).format('DD/MM/YY')}
-            type='number'
-          />
-          <YAxis dataKey='value' name='Value' domain={[90, 'auto']} />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+    <div className={styles.container}>
+      <Header />
+      <SideDrawer />
+      <div className={styles.mainWrapper}>
+        <div className={styles.main}>
+          <ResponsiveContainer width='45%' height={500}>
+            <ScatterChart>
+              <XAxis
+                dataKey='time'
+                domain={['auto', 'auto']}
+                name='Time'
+                tickFormatter={(unixTime) => moment(unixTime).format('DD/MM/YY')}
+                type='number'
+              />
+              <YAxis dataKey='value' name='Value' domain={[90, 'auto']} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
 
-          <Scatter
-            data={chartData}
-            line={{ stroke: '#aaa', strokeWidth: 1 }}
-            lineJointType='monotoneX'
-            lineType='joint'
-            name='Values'
-          />
-        </ScatterChart>
-      </ResponsiveContainer>
-      <br />
-      <div>
-        {weight.map((reading, i) => {
-          return <div key={i}>{JSON.stringify(reading, null, 2)}</div>
-        })}
+              <Scatter
+                data={chartData}
+                line={{ stroke: '#aaa', strokeWidth: 1 }}
+                lineJointType='monotoneX'
+                lineType='joint'
+                name='Values'
+              />
+            </ScatterChart>
+          </ResponsiveContainer>
+          <br />
+          <div>
+            {weight.map((reading, i) => {
+              return <div key={i}>{JSON.stringify(reading, null, 2)}</div>
+            })}
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -1,18 +1,19 @@
 import { getCookie } from 'cookies-next'
 import Image from 'next/image'
 import { useState } from 'react'
+import styles from '../styles/index.module.css'
 
 export default function Landing() {
   const [loading, setLoading] = useState(false)
   return (
-    <div className='container'>
+    <div className={styles.container}>
       <div className='card'>
         <div className='logo-image'>
           <Image alt='logo' src='/logo.png' width={150} height={150} />
         </div>
         <h1>Cylch</h1>
-        <p className='subheading'>Use your Fitbit data against your lizard brain and hack yourself to healthy</p>
-        <div className={`login-button ${loading ? 'login-button--loading' : ''}`}>
+        <p className='subheading'>Use your Fitbit data against your lizard brain and hack yourself to a healthy life</p>
+        <div className={`${styles.loginButton} ${loading ? styles.loginButtonLoading : ''}`}>
           <a
             target='_self'
             onClick={() => setLoading(true)}

@@ -1,30 +1,5 @@
 html,
 body {
-  background: radial-gradient(
-        circle,
-        #2baa78aa 0.75em,
-        rgba(255, 255, 255, 0) 0.75em,
-        rgba(255, 255, 255, 0) 1.5em,
-        #aa2b5daa 1.5em,
-        #aa2b5daa 1.8em,
-        rgba(255, 255, 255, 0) 1.8em
-      )
-      0 0,
-    radial-gradient(
-        circle,
-        #2baa78aa 0.75em,
-        rgba(255, 255, 255, 0) 0.75em,
-        rgba(255, 255, 255, 0) 1.5em,
-        #aa2b5daa 1.5em,
-        #aa2b5daa 1.8em,
-        rgba(255, 255, 255, 0) 1.8em
-      )
-      3em 3em,
-    radial-gradient(circle, #2b9daaaa 0.375em, rgba(255, 255, 255, 0) 0.375em) 3em 0,
-    radial-gradient(circle, #2baa38aa 0.3em, rgba(255, 255, 255, 0) 0.3em) 0 3em;
-  background-size: 6em 6em;
-  background-color: #002939;
-  background-repeat: repeat;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
@@ -38,103 +13,6 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-.margin {
-  margin: 0.5rem;
-}
-
-.margin-top {
-  margin-top: 0.5rem;
-}
-
-.margin-right {
-  margin-right: 0.5rem;
-}
-
-.margin-bottom {
-  margin-bottom: 0.5rem;
-}
-
-.margin-left {
-  margin-left: 0.5rem;
-}
-
-.flex {
-  display: flex;
-}
-
-.login-button {
-  width: 100%;
-  padding: 20px;
-  margin-top: auto;
-}
-
-.login-button a {
-  appearance: none;
-  background-color: #000000;
-  border: 2px solid #1a1a1a;
-  border-radius: 15px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-  margin: 0;
-  min-height: 60px;
-  min-width: 0;
-  outline: none;
-  padding: 16px 24px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: 100%;
-  will-change: transform;
-}
-
-.login-button a:disabled {
-  pointer-events: none;
-}
-
-.login-button a:hover {
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-}
-
-.login-button a:active {
-  box-shadow: none;
-}
-
-@keyframes button-loading-spinner {
-  from {
-    transform: rotate(0turn);
-  }
-
-  to {
-    transform: rotate(1turn);
-  }
-}
-
-/* https://dev.to/dcodeyt/create-a-button-with-a-loading-spinner-in-html-css-1c0h */
-
-.login-button--loading a::after {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  border: 4px solid transparent;
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: button-loading-spinner 1s ease infinite;
 }
 
 .container {
@@ -167,6 +45,5 @@ a {
 }
 
 .subheading {
-  padding: 10px;
-  line-height: 2;
+  margin: 0;
 }

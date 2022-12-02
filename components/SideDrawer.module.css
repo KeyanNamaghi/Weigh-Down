@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  padding: 10px 20px;
+  height: 100%;
+  width: 200px;
+  background-color: #053448;
+  color: white;
+  box-shadow: rgb(0 0 0 / 20%) 0px 5px 10px 3px;
+  align-items: center;
+  gap: 20px;
+}
