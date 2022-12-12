@@ -25,9 +25,10 @@ export default function Home({ data }) {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header title='Home' />
       <SideDrawer />
       <div className={styles.mainWrapper}>
+        <button onClick={() => fetch('/api/dailyActivity')}>Click</button>
         <div className={styles.main}>
           <ResponsiveContainer width='45%' height={500}>
             <ScatterChart>
