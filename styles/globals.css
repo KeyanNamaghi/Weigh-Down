@@ -29,7 +29,7 @@ a {
   background-color: #ffffff;
   box-shadow: rgb(0 0 0 / 70%) 0px 0px 15px 10px;
   width: clamp(300px, 70vw, 500px);
-  height: clamp(300px, 60vh, 700px);
+  height: clamp(500px, 65vh, 700px);
   margin: 100px auto;
   border-radius: 10px;
   font-family: 'Arial';
@@ -47,4 +47,5 @@ a {
 .subheading {
   margin: 0;
   line-height: 2;
+  font-style: italic;
 }
