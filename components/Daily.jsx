@@ -92,7 +92,9 @@ export const Daily = () => {
             <div ref={circularProgressRef3} className={`${styles.circularProgress} ${styles.circle3}`}>
               <span className={styles.zone}>{getZone()}</span>
               <span className={styles.steps}>{getSteps()}</span>
-              <span className={styles.distance}>{getDistance()} km</span>
+              <span className={styles.distance}>
+                {getDistance()} {data && 'km'}
+              </span>
             </div>
           </div>
         </div>
