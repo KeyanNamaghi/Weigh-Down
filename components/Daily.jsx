@@ -54,6 +54,10 @@ export const Daily = () => {
   const circularProgressRef2 = useRef(null)
   const circularProgressRef3 = useRef(null)
 
+  const getSteps = () => data && data.summary.steps
+  const getZone = () => data && Number(data.summary.fairlyActiveMinutes) + Number(data.summary.veryActiveMinutes)
+  const getDistance = () => data && data.summary.distances.find((distance) => distance.activity === 'tracker').distance
+
   useEffect(() => {
     const fetchData = async () => {
       const request = await fetch('/api/activities')
@@ -67,12 +71,9 @@ export const Daily = () => {
   useEffect(() => {
     if (!data) return
 
-    const stepPercentage = (100 * data.summary.steps) / data.goals.steps
-    const zonePercentage =
-      (100 * (data.summary.lightlyActiveMinutes + data.summary.fairlyActiveMinutes + data.summary.veryActiveMinutes)) /
-      data.goals.steps
-    const distancePercentage =
-      (100 * data.summary.distances.find((distance) => distance.activity === 'tracker').distance) / data.goals.distance
+    const stepPercentage = (100 * getSteps()) / data.goals.steps
+    const zonePercentage = (100 * getZone()) / data.goals.activeMinutes
+    const distancePercentage = (100 * getDistance()) / data.goals.distance
 
     if (circularProgressRef1.current) {
       circularProgressRef1.current.style.background = `conic-gradient(#aa2b5d ${stepPercentage * 3.6}deg, #ededed 0deg)`
@@ -83,25 +84,20 @@ export const Daily = () => {
     }
   }, [data])
 
-  if (!data) {
-    return 'skeleton loader 💀'
-  }
-
-  const { activities, goals, summary } = data
-  const { steps } = summary
-
   return (
     <div>
-      {data && (
-        <div className={styles.container}>
-          <div ref={circularProgressRef1} className={`${styles.circularProgress} ${styles.circle1}`}>
-            <div ref={circularProgressRef2} className={`${styles.circularProgress} ${styles.circle2}`}>
-              <div ref={circularProgressRef3} className={`${styles.circularProgress} ${styles.circle3}`}></div>
+      <div className={styles.container}>
+        <div ref={circularProgressRef1} className={`${styles.circularProgress} ${styles.circle1}`}>
+          <div ref={circularProgressRef2} className={`${styles.circularProgress} ${styles.circle2}`}>
+            <div ref={circularProgressRef3} className={`${styles.circularProgress} ${styles.circle3}`}>
+              <span className={styles.zone}>{getZone()}</span>
+              <span className={styles.steps}>{getSteps()}</span>
+              <span className={styles.distance}>{getDistance()} km</span>
             </div>
           </div>
-          <IconKeys />
         </div>
-      )}
+        <IconKeys />
+      </div>
     </div>
   )
 }

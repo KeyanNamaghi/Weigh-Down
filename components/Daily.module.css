@@ -49,10 +49,31 @@
   height: 170px;
   width: 170px;
   background: conic-gradient(#2b9daa 0deg, #ededed 0deg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .circle3::before {
   height: 150px;
   width: 150px;
+}
+
+.steps {
+  z-index: 1;
+  color: #aa2b5d;
+  font-size: xx-large;
+}
+
+.zone {
+  z-index: 1;
+  color: #2baa78;
+  /* font-size: small; */
+}
+
+.distance {
+  z-index: 1;
+  color: #2b9daa;
+  font-size: small;
 }
 
 .progressValue {
