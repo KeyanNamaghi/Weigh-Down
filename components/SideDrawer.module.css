@@ -10,6 +10,12 @@
   gap: 20px;
 }
 
+@media only screen and (max-width: 992px) {
+  .container {
+    display: none;
+  }
+}
+
 .container p {
   margin: 2px;
 }
