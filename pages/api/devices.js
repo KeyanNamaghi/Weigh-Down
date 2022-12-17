@@ -48,7 +48,13 @@ export default async function handler(req, res) {
   const tracker = json
     .filter((device) => device.type === 'TRACKER')
     .map((device) => {
-      return { battery: device.battery, batteryLevel: device.batteryLevel, deviceVersion: device.deviceVersion }
+      return {
+        battery: device.battery,
+        batteryLevel: device.batteryLevel,
+        deviceVersion: device.deviceVersion,
+        type: device.type,
+        lastSyncTime: device.lastSyncTime,
+      }
     })[0]
 
   res.status(200).json(tracker)
