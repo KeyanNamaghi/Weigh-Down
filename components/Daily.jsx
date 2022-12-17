@@ -82,7 +82,7 @@ export const Daily = () => {
         distancePercentage * 3.6
       }deg, #ededed 0deg)`
     }
-  }, [data])
+  }, [data, getDistance, getSteps, getZone])
 
   return (
     <div>
