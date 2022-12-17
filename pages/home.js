@@ -7,12 +7,12 @@ import { Header, SideDrawer, Daily } from '../components'
 import styles from '../styles/Home.module.css'
 
 export default function Home({ data }) {
-  const { weight = [] } = data
+  // const { weight = [] } = data
 
-  const chartData = weight.map(({ weight, date }) => ({
-    value: weight,
-    time: moment(date).valueOf(),
-  }))
+  // const chartData = weight.map(({ weight, date }) => ({
+  //   value: weight,
+  //   time: moment(date).valueOf(),
+  // }))
 
   // Remove the annoying #_=_ at the end of the url on redirect
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Home({ data }) {
       <SideDrawer />
       <div className={styles.mainWrapper}>
         <Daily />
-        <div className={styles.main}>
+        {/* <div className={styles.main}>
           <ResponsiveContainer width='100%' height={500}>
             <ScatterChart>
               <XAxis
@@ -51,7 +51,7 @@ export default function Home({ data }) {
               />
             </ScatterChart>
           </ResponsiveContainer>
-        </div>
+        </div> */}
       </div>
     </div>
   )
@@ -62,16 +62,16 @@ export async function getServerSideProps({ req, res }) {
 
   const isDemo = getCookie('_wd_demo', { req, res })
   if (isDemo) {
-    let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
-      headers: {
-        cookie: `_wd_demo=true`,
-      },
-    })
-    let json = await weight.json()
+    // let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
+    //   headers: {
+    //     cookie: `_wd_demo=true`,
+    //   },
+    // })
+    // let json = await weight.json()
 
     return {
       props: {
-        data: json,
+        data: {},
       },
     }
   }
@@ -86,12 +86,12 @@ export async function getServerSideProps({ req, res }) {
     }
   }
 
-  let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
-    headers: {
-      cookie: `accessToken=${accessToken}`,
-    },
-  })
-  let json = await weight.json()
+  // let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
+  //   headers: {
+  //     cookie: `accessToken=${accessToken}`,
+  //   },
+  // })
+  // let json = await weight.json()
 
   if (json.errors) {
     console.log({ error: json.errors })
@@ -110,12 +110,12 @@ export async function getServerSideProps({ req, res }) {
 
     console.log('refetching with new access token')
 
-    weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
-      headers: {
-        cookie: `accessToken=${accessToken}`,
-      },
-    })
-    json = await weight.json()
+    // weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
+    //   headers: {
+    //     cookie: `accessToken=${accessToken}`,
+    //   },
+    // })
+    // json = await weight.json()
   }
 
   return {
