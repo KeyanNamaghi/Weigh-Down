@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from './SideDrawer.module.css'
 
 const Tracker = ({ battery, batteryLevel, deviceVersion, lastSyncTime, type }) => {
+  // I'm stupid and forgot about Intl.RelativeTimeFormat and I have moment installed
   const syncedLast = new Date(lastSyncTime)
   const now = new Date()
   const hours = Math.floor((now - syncedLast) / (1000 * 60 * 60))

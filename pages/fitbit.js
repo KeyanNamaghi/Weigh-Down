@@ -1,3 +1,4 @@
+import { deleteCookie } from 'cookies-next'
 import { getAccessToken } from '../utils/getAccessToken'
 
 export default function Fitbit() {
@@ -8,7 +9,8 @@ export async function getServerSideProps({ req, res, query }) {
   console.log('fitbit.js')
   const { code } = query
 
-  console.log({ query })
+  // Clear any previous demo session
+  deleteCookie('_wd_demo', { req, res })
 
   if (!code) {
     console.log('Missing code when landing on /fitbit')

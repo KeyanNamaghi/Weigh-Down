@@ -28,7 +28,6 @@ export default function Home({ data }) {
       <Header title='Home' />
       <SideDrawer />
       <div className={styles.mainWrapper}>
-        <button onClick={() => fetch('/api/dailyActivity')}>Click</button>
         <div className={styles.main}>
           <ResponsiveContainer width='100%' height={500}>
             <ScatterChart>
@@ -59,7 +58,32 @@ export default function Home({ data }) {
 
 export async function getServerSideProps({ req, res }) {
   console.log('home.js')
+
+  const isDemo = getCookie('_wd_demo', { req, res })
+  if (isDemo) {
+    let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
+      headers: {
+        cookie: `_wd_demo=true`,
+      },
+    })
+    let json = await weight.json()
+
+    return {
+      props: {
+        data: json,
+      },
+    }
+  }
+
   const accessToken = getCookie('_wd_access_token', { req, res })
+
+  if (!accessToken) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+    }
+  }
 
   let weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
     headers: {
