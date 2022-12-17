@@ -80,7 +80,7 @@ const demoMock = {
       },
       {
         activity: 'tracker',
-        distance: 8.12,
+        distance: 7.12,
       },
       {
         activity: 'loggedActivities',

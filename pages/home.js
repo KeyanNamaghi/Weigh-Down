@@ -25,7 +25,7 @@ export default function Home({ data }) {
 
   return (
     <div className={styles.container}>
-      <Header title='Home' />
+      <Header title='Home' demo={data.isDemo} />
       <SideDrawer />
       <div className={styles.mainWrapper}>
         <Daily />
@@ -71,7 +71,7 @@ export async function getServerSideProps({ req, res }) {
 
     return {
       props: {
-        data: {},
+        data: { isDemo },
       },
     }
   }
@@ -93,34 +93,34 @@ export async function getServerSideProps({ req, res }) {
   // })
   // let json = await weight.json()
 
-  if (json.errors) {
-    console.log({ error: json.errors })
-    const error = await getRefreshToken(req, res)
+  // if (json.errors) {
+  //   console.log({ error: json.errors })
+  //   const error = await getRefreshToken(req, res)
 
-    console.log({ error })
+  //   console.log({ error })
 
-    if ({ error }) {
-      console.log('refresh failed')
-      return {
-        redirect: {
-          destination: '/',
-        },
-      }
-    }
+  //   if ({ error }) {
+  //     console.log('refresh failed')
+  //     return {
+  //       redirect: {
+  //         destination: '/',
+  //       },
+  //     }
+  //   }
 
-    console.log('refetching with new access token')
+  //   console.log('refetching with new access token')
 
-    // weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
-    //   headers: {
-    //     cookie: `accessToken=${accessToken}`,
-    //   },
-    // })
-    // json = await weight.json()
-  }
+  // weight = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/weight`, {
+  //   headers: {
+  //     cookie: `accessToken=${accessToken}`,
+  //   },
+  // })
+  // json = await weight.json()
+  // }
 
   return {
     props: {
-      data: json,
+      data: {},
     },
   }
 }
