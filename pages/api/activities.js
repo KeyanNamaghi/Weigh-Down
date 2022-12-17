@@ -157,7 +157,9 @@ export default async function handler(req, res) {
 
   const accessToken = getCookie('_wd_access_token', { req, res })
 
-  const data = await fetch('https://api.fitbit.com/1/user/-/activities/date/2022-12-11.json', {
+  const currentDate = new Date().toISOString().split('T')[0]
+
+  const data = await fetch(`https://api.fitbit.com/1/user/-/activities/date/${currentDate}.json`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
