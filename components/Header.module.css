@@ -8,6 +8,7 @@
   box-shadow: rgb(0 0 0 / 20%) 0px 5px 10px 3px;
   align-items: center;
   gap: 20px;
+  z-index: 100;
 }
 
 .logo {

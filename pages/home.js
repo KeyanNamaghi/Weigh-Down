@@ -3,7 +3,7 @@ import { XAxis, YAxis, ScatterChart, Scatter, ResponsiveContainer, Tooltip } fro
 import moment from 'moment'
 import { getRefreshToken } from '../utils/getRefreshToken'
 import { useEffect } from 'react'
-import { Header, SideDrawer } from '../components'
+import { Header, SideDrawer, Daily } from '../components'
 import styles from '../styles/Home.module.css'
 
 export default function Home({ data }) {
@@ -28,6 +28,7 @@ export default function Home({ data }) {
       <Header title='Home' />
       <SideDrawer />
       <div className={styles.mainWrapper}>
+        <Daily />
         <div className={styles.main}>
           <ResponsiveContainer width='100%' height={500}>
             <ScatterChart>

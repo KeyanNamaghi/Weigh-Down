@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  width: 420px;
+  padding: 50px 0;
+  border-radius: 8px;
+  background: #fff;
+  row-gap: 30px;
+  flex-direction: column;
+  align-items: center;
+}
+.circularProgress {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s all;
+}
+.circularProgress::before {
+  content: '';
+  position: absolute;
+  height: 240px;
+  width: 240px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.circle1 {
+  height: 250px;
+  width: 250px;
+  background: conic-gradient(#aa2b5d 0deg, #ededed 0deg);
+}
+.circle1::before {
+  height: 230px;
+  width: 230px;
+}
+
+.circle2 {
+  height: 210px;
+  width: 210px;
+  background: conic-gradient(#2baa78 0deg, #ededed 0deg);
+}
+.circle2::before {
+  height: 190px;
+  width: 190px;
+}
+
+.circle3 {
+  height: 170px;
+  width: 170px;
+  background: conic-gradient(#2b9daa 0deg, #ededed 0deg);
+}
+.circle3::before {
+  height: 150px;
+  width: 150px;
+}
+
+.progressValue {
+  position: relative;
+  font-size: 40px;
+  font-weight: 600;
+  color: #7d2ae8;
+}
+
+.icons {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 0 40px;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconContainer span {
+  margin-top: 10px;
+  font-size: small;
+}

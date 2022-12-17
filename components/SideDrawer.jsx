@@ -34,7 +34,6 @@ export const SideDrawer = () => {
     const fetchDevices = async () => {
       const request = await fetch('/api/devices')
       const data = await request.json()
-      setDeviceData(data)
 
       if (data.battery && data.batteryLevel && data.deviceVersion) {
         setDeviceData(data)
