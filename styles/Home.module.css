@@ -15,10 +15,12 @@
   flex: auto;
   height: 100%;
   padding: 20px;
+  overflow-y: scroll;
 }
 
 .main {
   position: absolute;
+  width: calc(100% - 40px);
 }
 
 /* 

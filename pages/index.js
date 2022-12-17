@@ -1,4 +1,5 @@
 import { getCookie } from 'cookies-next'
+import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import styles from '../styles/Landing.module.css'
@@ -7,6 +8,10 @@ export default function Landing() {
   const [loading, setLoading] = useState(false)
   return (
     <div className={styles.container}>
+      <Head>
+        <title>{'Cylch'}</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <div className='card'>
         <div className='logo-image'>
           <Image alt='logo' src='/logo.png' width={150} height={150} />

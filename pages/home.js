@@ -30,7 +30,7 @@ export default function Home({ data }) {
       <div className={styles.mainWrapper}>
         <button onClick={() => fetch('/api/dailyActivity')}>Click</button>
         <div className={styles.main}>
-          <ResponsiveContainer width='45%' height={500}>
+          <ResponsiveContainer width='100%' height={500}>
             <ScatterChart>
               <XAxis
                 dataKey='time'
@@ -51,12 +51,6 @@ export default function Home({ data }) {
               />
             </ScatterChart>
           </ResponsiveContainer>
-          <br />
-          <div>
-            {weight.map((reading, i) => {
-              return <div key={i}>{JSON.stringify(reading, null, 2)}</div>
-            })}
-          </div>
         </div>
       </div>
     </div>
