@@ -67,11 +67,19 @@ export const Daily = () => {
   useEffect(() => {
     if (!data) return
 
-    const percentage = (100 * data.summary.steps) / data.goals.steps
+    const stepPercentage = (100 * data.summary.steps) / data.goals.steps
+    const zonePercentage =
+      (100 * (data.summary.lightlyActiveMinutes + data.summary.fairlyActiveMinutes + data.summary.veryActiveMinutes)) /
+      data.goals.steps
+    const distancePercentage =
+      (100 * data.summary.distances.find((distance) => distance.activity === 'tracker').distance) / data.goals.distance
+
     if (circularProgressRef1.current) {
-      circularProgressRef1.current.style.background = `conic-gradient(#aa2b5d ${percentage * 3.6}deg, #ededed 0deg)`
-      circularProgressRef2.current.style.background = `conic-gradient(#2baa78 ${Math.random() * 360}deg, #ededed 0deg)`
-      circularProgressRef3.current.style.background = `conic-gradient(#2b9daa ${Math.random() * 360}deg, #ededed 0deg)`
+      circularProgressRef1.current.style.background = `conic-gradient(#aa2b5d ${stepPercentage * 3.6}deg, #ededed 0deg)`
+      circularProgressRef2.current.style.background = `conic-gradient(#2baa78 ${zonePercentage * 3.6}deg, #ededed 0deg)`
+      circularProgressRef3.current.style.background = `conic-gradient(#2b9daa ${
+        distancePercentage * 3.6
+      }deg, #ededed 0deg)`
     }
   }, [data])
 
